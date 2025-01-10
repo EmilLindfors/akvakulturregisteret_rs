@@ -1,10 +1,17 @@
 [package]
 name = "akvakulturregisteret_rs"
 version = "1.0.0"
-authors = ["akva-hjelp@fiskeridir.no"]
+authors = ["Emill Lindfors"]
+repository = "https://github.com/EmilLindfors/akvakulturregisteret_rs"
 description = "API for det nye offentlige Akvakulturregisteret"
-license = "FDIR data usage license"
+license = "MIT"
 edition = "2021"
+
+[package.metadata.wix]
+upgrade-guid = "524E84CC-1735-4B4D-93EF-283E05BE6236"
+path-guid = "BC63A342-AD36-423D-9CA5-522717D60402"
+license = false
+eula = false
 
 [dependencies]
 serde = { version = "^1.0", features = ["derive"] }
@@ -18,18 +25,24 @@ mockall = { version = "^0.13", optional = true}
 bon = { version = "2.3", optional = true }
 clap = { version = "4.4", features = ["derive"],  optional = true }
 tokio = { version = "1.0", features = ["full"],  optional = true }
-csv = "1.3.1"
+csv = { version = "1.3", optional = true }
 
 [features]
-default = ["mockall", "bon", "tokio", "clap"]
+default = ["mockall", "bon", "tokio", "clap", "csv"]
 mockall = ["dep:mockall"]
 bon = ["dep:bon"]
 tokio = ["dep:tokio"]
 clap = ["dep:clap"]
+csv = ["dep:csv"]
 
 [[bin]]
 name = "areg"
 path = "bin/cli.rs"
 required-features = ["clap", "tokio"]
+
+# The profile that 'dist' will build with
+[profile.dist]
+inherits = "release"
+lto = "thin"
 
 
