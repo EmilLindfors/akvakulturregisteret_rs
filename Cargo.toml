@@ -1,6 +1,6 @@
 [package]
 name = "akvakulturregisteret_rs"
-version = "0.2.0"
+version = "0.3.0"
 authors = ["Emill Lindfors"]
 repository = "https://github.com/EmilLindfors/akvakulturregisteret_rs"
 description = "API for det nye offentlige Akvakulturregisteret"
