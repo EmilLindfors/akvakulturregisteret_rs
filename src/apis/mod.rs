@@ -16,7 +16,7 @@ pub enum Error<T> {
     ResponseError(ResponseContent<T>),
 }
 
-impl <T> fmt::Display for Error<T> {
+impl<T> fmt::Display for Error<T> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let (module, e) = match self {
             Error::Reqwest(e) => ("reqwest", e.to_string()),
@@ -28,7 +28,7 @@ impl <T> fmt::Display for Error<T> {
     }
 }
 
-impl <T: fmt::Debug> error::Error for Error<T> {
+impl<T: fmt::Debug> error::Error for Error<T> {
     fn source(&self) -> Option<&(dyn error::Error + 'static)> {
         Some(match self {
             Error::Reqwest(e) => e,
@@ -39,19 +39,19 @@ impl <T: fmt::Debug> error::Error for Error<T> {
     }
 }
 
-impl <T> From<reqwest::Error> for Error<T> {
+impl<T> From<reqwest::Error> for Error<T> {
     fn from(e: reqwest::Error) -> Self {
         Error::Reqwest(e)
     }
 }
 
-impl <T> From<serde_json::Error> for Error<T> {
+impl<T> From<serde_json::Error> for Error<T> {
     fn from(e: serde_json::Error) -> Self {
         Error::Serde(e)
     }
 }
 
-impl <T> From<std::io::Error> for Error<T> {
+impl<T> From<std::io::Error> for Error<T> {
     fn from(e: std::io::Error) -> Self {
         Error::Io(e)
     }
@@ -78,8 +78,10 @@ pub fn parse_deep_object(prefix: &str, value: &serde_json::Value) -> Vec<(String
                             value,
                         ));
                     }
-                },
-                serde_json::Value::String(s) => params.push((format!("{}[{}]", prefix, key), s.clone())),
+                }
+                serde_json::Value::String(s) => {
+                    params.push((format!("{}[{}]", prefix, key), s.clone()))
+                }
                 _ => params.push((format!("{}[{}]", prefix, key), value.to_string())),
             }
         }
@@ -122,12 +124,24 @@ pub struct ApiClient {
 impl ApiClient {
     pub fn new(configuration: Arc<configuration::Configuration>) -> Self {
         Self {
-            area_resource_api: Box::new(area_resource_api::AreaResourceApiClient::new(configuration.clone())),
-            csv_dump_resource_api: Box::new(csv_dump_resource_api::CsvDumpResourceApiClient::new(configuration.clone())),
-            entity_resource_api: Box::new(entity_resource_api::EntityResourceApiClient::new(configuration.clone())),
-            license_resource_api: Box::new(license_resource_api::LicenseResourceApiClient::new(configuration.clone())),
-            license_type_resource_api: Box::new(license_type_resource_api::LicenseTypeResourceApiClient::new(configuration.clone())),
-            site_resource_api: Box::new(site_resource_api::SiteResourceApiClient::new(configuration.clone())),
+            area_resource_api: Box::new(area_resource_api::AreaResourceApiClient::new(
+                configuration.clone(),
+            )),
+            csv_dump_resource_api: Box::new(csv_dump_resource_api::CsvDumpResourceApiClient::new(
+                configuration.clone(),
+            )),
+            entity_resource_api: Box::new(entity_resource_api::EntityResourceApiClient::new(
+                configuration.clone(),
+            )),
+            license_resource_api: Box::new(license_resource_api::LicenseResourceApiClient::new(
+                configuration.clone(),
+            )),
+            license_type_resource_api: Box::new(
+                license_type_resource_api::LicenseTypeResourceApiClient::new(configuration.clone()),
+            ),
+            site_resource_api: Box::new(site_resource_api::SiteResourceApiClient::new(
+                configuration.clone(),
+            )),
         }
     }
 }
@@ -171,7 +185,8 @@ impl MockApiClient {
             csv_dump_resource_api_mock: csv_dump_resource_api::MockCsvDumpResourceApi::new(),
             entity_resource_api_mock: entity_resource_api::MockEntityResourceApi::new(),
             license_resource_api_mock: license_resource_api::MockLicenseResourceApi::new(),
-            license_type_resource_api_mock: license_type_resource_api::MockLicenseTypeResourceApi::new(),
+            license_type_resource_api_mock:
+                license_type_resource_api::MockLicenseTypeResourceApi::new(),
             site_resource_api_mock: site_resource_api::MockSiteResourceApi::new(),
         }
     }
@@ -198,4 +213,3 @@ impl Api for MockApiClient {
         &self.site_resource_api_mock
     }
 }
-

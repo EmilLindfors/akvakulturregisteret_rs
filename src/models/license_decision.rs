@@ -48,7 +48,10 @@ pub struct LicenseDecision {
     #[serde(rename = "licenseNr", skip_serializing_if = "Option::is_none")]
     pub license_nr: Option<String>,
     /// Vedtak i referanse til tillatelsesnummer.
-    #[serde(rename = "decisionInRefToLicenseNr", skip_serializing_if = "Option::is_none")]
+    #[serde(
+        rename = "decisionInRefToLicenseNr",
+        skip_serializing_if = "Option::is_none"
+    )]
     pub decision_in_ref_to_license_nr: Option<String>,
     /// Unik tillatelsesversjons identifikator.
     #[serde(rename = "licenseVersionId", skip_serializing_if = "Option::is_none")]
@@ -83,4 +86,3 @@ impl LicenseDecision {
         }
     }
 }
-

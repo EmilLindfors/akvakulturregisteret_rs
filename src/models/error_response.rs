@@ -22,9 +22,6 @@ pub struct ErrorResponse {
 impl ErrorResponse {
     /// Error respons.
     pub fn new() -> ErrorResponse {
-        ErrorResponse {
-            message: None,
-        }
+        ErrorResponse { message: None }
     }
 }
-

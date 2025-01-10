@@ -27,7 +27,10 @@ pub struct SiteForLegalEntity {
     #[serde(rename = "siteTempCapacity", skip_serializing_if = "Option::is_none")]
     pub site_temp_capacity: Option<f64>,
     /// Kapasitetsenheten som blir brukt for å beskrive kapasitetsmengden på lokaliteten. Oppgitt i f.eks. Tonn.
-    #[serde(rename = "siteCapacityUnitType", skip_serializing_if = "Option::is_none")]
+    #[serde(
+        rename = "siteCapacityUnitType",
+        skip_serializing_if = "Option::is_none"
+    )]
     pub site_capacity_unit_type: Option<String>,
     #[serde(rename = "sitePlacement", skip_serializing_if = "Option::is_none")]
     pub site_placement: Option<Box<models::AreaPlacement>>,
@@ -69,4 +72,3 @@ impl SiteForLegalEntity {
         }
     }
 }
-

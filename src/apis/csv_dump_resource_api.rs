@@ -25,7 +25,7 @@ pub trait CsvDumpResourceApi: Send + Sync {
     async fn get_new_legacy_csv_dump(
         &self,
     ) -> Result<ResponseContent<GetNewLegacyCsvDumpSuccess>, Error<GetNewLegacyCsvDumpError>>;
-    
+
     // Change return type to handle binary data
     async fn get_new_legacy_csv_file_dump(
         &self,
@@ -70,31 +70,30 @@ impl CsvDumpResourceApi for CsvDumpResourceApiClient {
         let local_var_content = local_var_resp.text().await?;
 
         if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
+            // Skip the first line and remove any empty lines
+            let content_lines: Vec<&str> = local_var_content
+                .lines()
+                .skip(1) // Skip the title row
+                .filter(|line| !line.trim().is_empty())
+                .collect();
 
-              // Skip the first line and remove any empty lines
-              let content_lines: Vec<&str> = local_var_content
-              .lines()
-              .skip(1)  // Skip the title row
-              .filter(|line| !line.trim().is_empty())
-              .collect();
-          
-          // Create a new string with the filtered content
-          let filtered_content = content_lines.join("\n");
-
+            // Create a new string with the filtered content
+            let filtered_content = content_lines.join("\n");
 
             // Configure CSV reader with appropriate settings
             let mut csv_reader = ReaderBuilder::new()
                 .delimiter(b';')
-                .flexible(true)  // Handle variable number of fields
-                .trim(csv::Trim::All)  // Trim whitespace
+                .flexible(true) // Handle variable number of fields
+                .trim(csv::Trim::All) // Trim whitespace
                 .from_reader(filtered_content.as_bytes());
-            
+
             let headers: Vec<String> = csv_reader
-                .headers().unwrap_or(&StringRecord::new())
+                .headers()
+                .unwrap_or(&StringRecord::new())
                 .iter()
                 .map(|header| header.to_string())
                 .collect();
-            
+
             let records: Result<Vec<Value>, _> = csv_reader
                 .records()
                 .map(|record| {
@@ -109,12 +108,16 @@ impl CsvDumpResourceApi for CsvDumpResourceApiClient {
                 })
                 .collect();
 
-            let json_array = Value::Array(records.map_err(|e| Error::ResponseError(ResponseContent {
-                status: local_var_status,
-                content: "csv parsing error".to_string(),
-                entity: Some(GetNewLegacyCsvDumpError::UnknownValue(json!({"error": e.to_string()}))),
-            }))?);
-            
+            let json_array = Value::Array(records.map_err(|e| {
+                Error::ResponseError(ResponseContent {
+                    status: local_var_status,
+                    content: "csv parsing error".to_string(),
+                    entity: Some(GetNewLegacyCsvDumpError::UnknownValue(
+                        json!({"error": e.to_string()}),
+                    )),
+                })
+            })?);
+
             let local_var_entity = Some(GetNewLegacyCsvDumpSuccess::Status200(json_array));
             let local_var_result = ResponseContent {
                 status: local_var_status,
@@ -156,7 +159,7 @@ impl CsvDumpResourceApi for CsvDumpResourceApiClient {
         let local_var_resp = local_var_client.execute(local_var_req).await?;
 
         let local_var_status = local_var_resp.status();
-        
+
         if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
             Ok(local_var_resp.bytes().await?.to_vec())
         } else {

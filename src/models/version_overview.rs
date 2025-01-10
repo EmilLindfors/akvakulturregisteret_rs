@@ -27,7 +27,10 @@ pub struct VersionOverview {
     #[serde(rename = "versionCauseType", skip_serializing_if = "Option::is_none")]
     pub version_cause_type: Option<String>,
     /// Årsakstype-verdi.
-    #[serde(rename = "versionCauseTypeValue", skip_serializing_if = "Option::is_none")]
+    #[serde(
+        rename = "versionCauseTypeValue",
+        skip_serializing_if = "Option::is_none"
+    )]
     pub version_cause_type_value: Option<String>,
     /// Status.
     #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
@@ -51,4 +54,3 @@ impl VersionOverview {
         }
     }
 }
-

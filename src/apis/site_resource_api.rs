@@ -98,7 +98,7 @@ pub trait SiteResourceApi: Send + Sync {
         'operation,
     >(
         &self,
-       params: SitesApiParams<
+        params: SitesApiParams<
             'nr,
             'legal_entity_nr_id,
             'legal_entity_nr,
@@ -348,24 +348,24 @@ impl SiteResourceApi for SiteResourceApiClient {
     >(
         &self,
         params: SitesApiParams<
-        'nr,
-        'legal_entity_nr_id,
-        'legal_entity_nr,
-        'license_nr,
-        'name,
-        'placement,
-        'water,
-        'species_type,
-        'municipality_code,
-        'county_code,
-        'production_area_code,
-        'valid_from,
-        'registered_from,
-        'temporary_until,
-        'range,
-        'activity,
-        'operation,
-    >,
+            'nr,
+            'legal_entity_nr_id,
+            'legal_entity_nr,
+            'license_nr,
+            'name,
+            'placement,
+            'water,
+            'species_type,
+            'municipality_code,
+            'county_code,
+            'production_area_code,
+            'valid_from,
+            'registered_from,
+            'temporary_until,
+            'range,
+            'activity,
+            'operation,
+        >,
     ) -> Result<ResponseContent<SitesSuccess>, Error<SitesError>> {
         let local_var_configuration = &self.configuration;
 

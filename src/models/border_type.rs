@@ -21,9 +21,6 @@ pub struct BorderType {
 impl BorderType {
     /// Grensetype.
     pub fn new() -> BorderType {
-        BorderType {
-            value: None,
-        }
+        BorderType { value: None }
     }
 }
-

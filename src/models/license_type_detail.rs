@@ -30,13 +30,19 @@ pub struct LicenseTypeDetail {
     #[serde(rename = "productionStage", skip_serializing_if = "Option::is_none")]
     pub production_stage: Option<String>,
     /// Produksjonsprosess verdi.
-    #[serde(rename = "productionStageValue", skip_serializing_if = "Option::is_none")]
+    #[serde(
+        rename = "productionStageValue",
+        skip_serializing_if = "Option::is_none"
+    )]
     pub production_stage_value: Option<String>,
     /// Etikett f.eks. KOMM-MATF.
     #[serde(rename = "tag", skip_serializing_if = "Option::is_none")]
     pub tag: Option<String>,
     /// Informasjon om fordelingen av ressurser eller kvoter på denne typen tillatelse.
-    #[serde(rename = "allocationInformation", skip_serializing_if = "Option::is_none")]
+    #[serde(
+        rename = "allocationInformation",
+        skip_serializing_if = "Option::is_none"
+    )]
     pub allocation_information: Option<String>,
     /// Informasjon om lagringsprosessen på denne typen tillatelse.
     #[serde(rename = "stocking", skip_serializing_if = "Option::is_none")]
@@ -82,4 +88,3 @@ impl LicenseTypeDetail {
         }
     }
 }
-

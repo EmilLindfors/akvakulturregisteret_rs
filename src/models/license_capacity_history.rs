@@ -15,7 +15,10 @@ use serde::{Deserialize, Serialize};
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct LicenseCapacityHistory {
     /// Den akkumulerte kapasiteten som tillatelsen har oppnådd.
-    #[serde(rename = "accumulatedCapacity", skip_serializing_if = "Option::is_none")]
+    #[serde(
+        rename = "accumulatedCapacity",
+        skip_serializing_if = "Option::is_none"
+    )]
     pub accumulated_capacity: Option<f64>,
     /// Den nåværende kapasiteten til tillatelsen.
     #[serde(rename = "currentCapacity", skip_serializing_if = "Option::is_none")]
@@ -81,4 +84,3 @@ impl LicenseCapacityHistory {
         }
     }
 }
-

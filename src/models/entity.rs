@@ -52,10 +52,16 @@ pub struct Entity {
     #[serde(rename = "versionValidUntil", skip_serializing_if = "Option::is_none")]
     pub version_valid_until: Option<String>,
     /// Tidsstempel for når enhetsversjonen er registrert.
-    #[serde(rename = "versionRegisteredTime", skip_serializing_if = "Option::is_none")]
+    #[serde(
+        rename = "versionRegisteredTime",
+        skip_serializing_if = "Option::is_none"
+    )]
     pub version_registered_time: Option<String>,
     /// Hvem som registrerte enhetsversjonen.
-    #[serde(rename = "versionRegisteredBy", skip_serializing_if = "Option::is_none")]
+    #[serde(
+        rename = "versionRegisteredBy",
+        skip_serializing_if = "Option::is_none"
+    )]
     pub version_registered_by: Option<String>,
     /// Status.
     #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
@@ -85,4 +91,3 @@ impl Entity {
         }
     }
 }
-

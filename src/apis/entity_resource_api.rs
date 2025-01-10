@@ -116,12 +116,12 @@ pub trait EntityResourceApi: Send + Sync {
     >(
         &self,
         params: GetSitesForEntityApiParams<
-        'entity_nr,
-        'range,
-        'include_all_connections,
-        'activity,
-        'operation,
-    >,
+            'entity_nr,
+            'range,
+            'include_all_connections,
+            'activity,
+            'operation,
+        >,
     ) -> Result<
         ResponseContent<GetSitesForEntityByLegalEntityNrSuccess>,
         Error<GetSitesForEntityByLegalEntityNrError>,

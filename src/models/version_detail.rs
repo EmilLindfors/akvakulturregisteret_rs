@@ -30,7 +30,10 @@ pub struct VersionDetail {
     #[serde(rename = "versionCauseType", skip_serializing_if = "Option::is_none")]
     pub version_cause_type: Option<String>,
     /// Årsakstypeverdien
-    #[serde(rename = "versionCauseTypeValue", skip_serializing_if = "Option::is_none")]
+    #[serde(
+        rename = "versionCauseTypeValue",
+        skip_serializing_if = "Option::is_none"
+    )]
     pub version_cause_type_value: Option<String>,
     /// Status på versjonen av lokalitetsdataene.
     #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
@@ -42,7 +45,10 @@ pub struct VersionDetail {
     #[serde(rename = "versionableStatus", skip_serializing_if = "Option::is_none")]
     pub versionable_status: Option<String>,
     /// Versjonsbar statusverdi
-    #[serde(rename = "versionableStatusValue", skip_serializing_if = "Option::is_none")]
+    #[serde(
+        rename = "versionableStatusValue",
+        skip_serializing_if = "Option::is_none"
+    )]
     pub versionable_status_value: Option<String>,
 }
 
@@ -63,4 +69,3 @@ impl VersionDetail {
         }
     }
 }
-

@@ -32,7 +32,10 @@ pub struct LicenseDetail {
     #[serde(rename = "portfolioType", skip_serializing_if = "Option::is_none")]
     pub portfolio_type: Option<Box<models::LicensePortfolioType>>,
     /// Identifikatoren for hovedtillatelsen i tillatelsesporteføljen.
-    #[serde(rename = "portfolioMasterLicenseId", skip_serializing_if = "Option::is_none")]
+    #[serde(
+        rename = "portfolioMasterLicenseId",
+        skip_serializing_if = "Option::is_none"
+    )]
     pub portfolio_master_license_id: Option<i64>,
     /// Juridisk-enhetsnummer-identifikator.
     #[serde(rename = "legalEntityNrId", skip_serializing_if = "Option::is_none")]
@@ -91,4 +94,3 @@ impl LicenseDetail {
         }
     }
 }
-

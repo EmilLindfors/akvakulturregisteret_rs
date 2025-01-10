@@ -45,7 +45,10 @@ pub struct Site {
     #[serde(rename = "firstClearanceType", skip_serializing_if = "Option::is_none")]
     pub first_clearance_type: Option<String>,
     /// Første klareringstypeverdien til lokaliteten
-    #[serde(rename = "firstClearanceTypeValue", skip_serializing_if = "Option::is_none")]
+    #[serde(
+        rename = "firstClearanceTypeValue",
+        skip_serializing_if = "Option::is_none"
+    )]
     pub first_clearance_type_value: Option<String>,
     /// Breddegrad
     #[serde(rename = "latitude", skip_serializing_if = "Option::is_none")]
@@ -77,7 +80,10 @@ pub struct Site {
     #[serde(rename = "connections", skip_serializing_if = "Option::is_none")]
     pub connections: Option<Vec<models::LatestLicenseSiteConnectionDetail>>,
     /// Utdaterte forbindelser til lokaliteten
-    #[serde(rename = "obsoleteConnections", skip_serializing_if = "Option::is_none")]
+    #[serde(
+        rename = "obsoleteConnections",
+        skip_serializing_if = "Option::is_none"
+    )]
     pub obsolete_connections: Option<Vec<models::LatestLicenseSiteConnectionDetail>>,
     #[serde(rename = "version", skip_serializing_if = "Option::is_none")]
     pub version: Option<Box<models::VersionDetail>>,
@@ -85,7 +91,10 @@ pub struct Site {
     #[serde(rename = "isSlaughtery", skip_serializing_if = "Option::is_none")]
     pub is_slaughtery: Option<bool>,
     /// Om lokaliteten har kommersiell aktivitet eller ikke
-    #[serde(rename = "hasCommercialActivity", skip_serializing_if = "Option::is_none")]
+    #[serde(
+        rename = "hasCommercialActivity",
+        skip_serializing_if = "Option::is_none"
+    )]
     pub has_commercial_activity: Option<bool>,
     /// Om lokaliteten er en del av samlokalitet
     #[serde(rename = "hasColocation", skip_serializing_if = "Option::is_none")]
@@ -129,4 +138,3 @@ impl Site {
         }
     }
 }
-

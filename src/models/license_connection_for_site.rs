@@ -40,7 +40,10 @@ pub struct LicenseConnectionForSite {
     #[serde(rename = "productionStage", skip_serializing_if = "Option::is_none")]
     pub production_stage: Option<String>,
     /// Produksjonsstadie-verdi
-    #[serde(rename = "productionStageValue", skip_serializing_if = "Option::is_none")]
+    #[serde(
+        rename = "productionStageValue",
+        skip_serializing_if = "Option::is_none"
+    )]
     pub production_stage_value: Option<String>,
     /// Etikett.
     #[serde(rename = "tag", skip_serializing_if = "Option::is_none")]
@@ -85,4 +88,3 @@ impl LicenseConnectionForSite {
         }
     }
 }
-
